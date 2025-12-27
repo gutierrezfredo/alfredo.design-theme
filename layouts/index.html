@@ -6,6 +6,9 @@
         <h1 class="hero-name">{{ .Site.Params.portfolio_name | default .Site.Author.name | default .Site.Title }}</h1>
         <p class="hero-title">{{ .Site.Params.portfolio_title | default "Product Designer" }}</p>
         <p class="hero-about">{{ .Site.Params.portfolio_about | default .Site.Params.itunes_description }}</p>
+        {{ with .Site.Params.portfolio_intro }}
+        <p class="hero-intro">{{ . | markdownify }}</p>
+        {{ end }}
     </section>
 
     <!-- Case Studies -->
@@ -61,6 +64,27 @@
                 </div>
             </article>
         {{ end }}
+    </section>
+
+    <!-- Latest Blog Posts -->
+    <section class="latest-posts">
+        <h2 class="section-title">Latest from the Blog</h2>
+        <div class="blog-list">
+            {{ range first 2 (where .Site.RegularPages "Type" "post") }}
+            <article class="blog-item">
+                <div class="blog-item-content">
+                    <span class="blog-item-date">{{ .Date.Format "January 2, 2006" }}</span>
+                    <h3 class="blog-item-title">{{ .Title | default "Untitled" }}</h3>
+                    <a href="{{ .Permalink }}" class="blog-item-link">Read <span>→</span></a>
+                </div>
+                {{ with .Params.photos }}
+                <div class="blog-item-image">
+                    <img src="{{ index . 0 }}" alt="{{ $.Title }}" loading="lazy">
+                </div>
+                {{ end }}
+            </article>
+            {{ end }}
+        </div>
     </section>
 
 </div>
