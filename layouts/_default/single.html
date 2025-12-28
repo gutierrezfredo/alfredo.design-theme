@@ -4,6 +4,52 @@
 {{ if in $hiddenPages .RelPermalink }}
 <script>window.location.replace('/');</script>
 <noscript><meta http-equiv="refresh" content="0;url=/"></noscript>
+
+{{/* Blog page - show blog listing */}}
+{{ else if eq .RelPermalink "/blog/" }}
+<div class="blog-page">
+    <header class="page-header">
+        <h1 class="page-title">{{ .Title }}</h1>
+        {{ with .Content }}
+        <div class="page-description">{{ . }}</div>
+        {{ end }}
+    </header>
+
+    <section class="blog-list">
+        {{ $allPosts := where .Site.RegularPages "Type" "post" }}
+        {{ $blogPosts := slice }}
+        {{ range $allPosts }}
+            {{ $cats := .Params.categories }}
+            {{ range $cats }}
+                {{ if eq (. | lower) "blogs" }}
+                    {{ $blogPosts = $blogPosts | append $ }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+
+        {{ if gt (len $blogPosts) 0 }}
+            {{ range $blogPosts }}
+            <article class="blog-item">
+                <div class="blog-item-content">
+                    <span class="blog-item-date">{{ .Date.Format "January 2, 2006" }}</span>
+                    <h3 class="blog-item-title">
+                        <a href="{{ .Permalink }}">{{ .Title | default "Untitled" }}</a>
+                    </h3>
+                    <a href="{{ .Permalink }}" class="blog-item-link">Read <span>→</span></a>
+                </div>
+                {{ with .Params.photos }}
+                <a href="{{ $.Permalink }}" class="blog-item-image">
+                    <img src="{{ index . 0 }}" alt="{{ $.Title }}" loading="lazy">
+                </a>
+                {{ end }}
+            </article>
+            {{ end }}
+        {{ else }}
+            <p class="no-posts">No blog posts found.</p>
+        {{ end }}
+    </section>
+</div>
+
 {{ else }}
 <article class="page-single">
     {{ if .Title }}

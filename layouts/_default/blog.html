@@ -8,11 +8,20 @@
     </header>
 
     <section class="blog-list">
-        {{/* Get posts from the "blogs" category using Hugo's taxonomy system */}}
-        {{ $blogsCategory := index .Site.Taxonomies.categories "blogs" }}
+        {{/* Get all posts, then filter by "blogs" category */}}
+        {{ $allPosts := where .Site.RegularPages "Type" "post" }}
+        {{ $blogPosts := slice }}
+        {{ range $allPosts }}
+            {{ $cats := .Params.categories }}
+            {{ range $cats }}
+                {{ if eq (. | lower) "blogs" }}
+                    {{ $blogPosts = $blogPosts | append $ }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
 
-        {{ if $blogsCategory }}
-            {{ range $blogsCategory.Pages.ByDate.Reverse }}
+        {{ if gt (len $blogPosts) 0 }}
+            {{ range $blogPosts }}
             <article class="blog-item">
                 <div class="blog-item-content">
                     <span class="blog-item-date">{{ .Date.Format "January 2, 2006" }}</span>
