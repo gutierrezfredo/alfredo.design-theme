@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="page-content">
+    <header class="page-header">
+        <h1 class="page-title">{{ .Title }}</h1>
+    </header>
+
+    {{ with .Content }}
+    <div class="microblog-category-intro">{{ . }}</div>
+    {{ end }}
+
+    {{ $logs := where .Site.RegularPages "Params.categories" "intersect" (slice "logs") }}
+    {{ if $logs }}
+    <section class="posts-list" aria-label="Log posts">
+        {{ range $logs }}
+        <article class="post-item h-entry">
+            <header class="post-header">
+                {{ if .Title }}
+                <h2 class="post-title p-name">
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                </h2>
+                {{ end }}
+
+                <div class="post-meta">
+                    <a href="{{ .Permalink }}" class="post-date-link u-url">
+                        <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+                            {{ .Date | time.Format ":date_long" }}
+                        </time>
+                    </a>
+                    {{ if .Site.Author.name }}
+                    <span class="p-author" style="display: none;">{{ .Site.Author.name }}</span>
+                    {{ end }}
+                </div>
+            </header>
+
+            <div class="post-content e-content">
+                {{ .Content }}
+            </div>
+        </article>
+        {{ end }}
+    </section>
+    {{ else }}
+    <div class="empty-list">
+        <p>No logs found.</p>
+    </div>
+    {{ end }}
+</div>
+{{ end }}

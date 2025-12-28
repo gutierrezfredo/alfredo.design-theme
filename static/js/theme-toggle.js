@@ -33,19 +33,19 @@
     ];
 
     // Update icon and label visibility based on current theme
-    // Show sun + "Light" in dark mode (to switch to light)
-    // Show moon + "Dark" in light mode (to switch to dark)
+    // Show moon + "Dark" in dark mode (current mode)
+    // Show sun + "Light" in light mode (current mode)
     function updateIcon(theme) {
         if (theme === 'dark') {
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-            if (labelLight) labelLight.style.display = '';
-            if (labelDark) labelDark.style.display = 'none';
-        } else {
             sunIcon.style.display = 'none';
             moonIcon.style.display = 'block';
             if (labelLight) labelLight.style.display = 'none';
             if (labelDark) labelDark.style.display = '';
+        } else {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+            if (labelLight) labelLight.style.display = '';
+            if (labelDark) labelDark.style.display = 'none';
         }
         // Update subscribe tint for theme
         var idx = parseInt(getComputedStyle(html).getPropertyValue('--subscribe-tint-idx')) || 0;
