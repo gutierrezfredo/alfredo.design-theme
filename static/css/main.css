@@ -2808,3 +2808,55 @@ details:last-of-type {
         background-color: var(--color-background-alt);
     }
 }
+
+
+/* ===== 404 ERROR PAGE ===== */
+
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60vh;
+    padding: var(--spacing-2xl);
+}
+
+.error-code {
+    font-size: clamp(6rem, 20vw, 12rem);
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+    color: var(--color-text-muted);
+    opacity: 0.3;
+}
+
+.error-message {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 600;
+    margin: var(--spacing-md) 0;
+    color: var(--color-text);
+}
+
+.error-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    margin: 0 0 var(--spacing-xl);
+    max-width: 400px;
+}
+
+.error-link {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-xl);
+    background-color: var(--color-text);
+    color: var(--color-background);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: var(--radius-large);
+    transition: opacity var(--transition-fast);
+}
+
+.error-link:hover {
+    opacity: 0.8;
+}
