@@ -9,7 +9,7 @@
 
     <section class="blog-list">
         {{/* Get all posts, then filter by "blogs" category */}}
-        {{ $allPosts := where .Site.RegularPages "Section" "post" }}
+        {{ $allPosts := .Site.RegularPages }}
         {{ $blogPosts := slice }}
         {{ range $allPosts }}
             {{ $post := . }}
