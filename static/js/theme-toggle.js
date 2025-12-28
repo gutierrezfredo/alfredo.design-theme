@@ -64,7 +64,10 @@
 
     // Initialize
     updateIcon(getTheme());
-    toggle.addEventListener('click', toggleTheme);
+    toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleTheme();
+    });
 
     // Listen for system preference changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
