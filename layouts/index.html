@@ -10,6 +10,8 @@
         {{ range $lines }}
             {{ if hasPrefix . "![" }}
                 <div class="hero-avatar">{{ . | markdownify }}</div>
+            {{ else if hasPrefix . "<h1>" }}
+                <div class="hero-name">{{ . | safeHTML }}</div>
             {{ else if hasPrefix . "# " }}
                 <h1 class="hero-name">{{ strings.TrimPrefix "# " . }}</h1>
             {{ else if hasPrefix . "## " }}

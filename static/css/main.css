@@ -2289,6 +2289,18 @@ details:last-of-type {
     color: var(--color-text);
 }
 
+.hero-name h1 {
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    margin: 0;
+}
+
+.hero-name h1 span:first-child,
+.hero-name h1 span:last-child {
+    color: var(--color-text-muted);
+}
+
 .hero-title {
     font-size: clamp(0.75rem, 2vw, 0.9rem);
     font-weight: 400;
