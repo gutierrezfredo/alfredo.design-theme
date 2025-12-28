@@ -1,7 +1,10 @@
 {{ define "main" }}
-{{/* Hide pages used as content fragments */}}
+{{/* Redirect hidden pages to homepage */}}
 {{ $hiddenPages := slice "/intro/" "/footer/" "/social/" }}
-{{ if not (in $hiddenPages .RelPermalink) }}
+{{ if in $hiddenPages .RelPermalink }}
+<script>window.location.replace('/');</script>
+<noscript><meta http-equiv="refresh" content="0;url=/"></noscript>
+{{ else }}
 <article class="page-single">
     {{ if .Title }}
     <header class="page-header">
