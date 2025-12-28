@@ -62,7 +62,7 @@
     --container-width: 42rem;
     --container-width-wide: 62rem;
     --content-width-narrow: 36rem;
-    --header-height: 4.75rem;
+    --header-height: 4rem;
     --touch-target-height: 48px;
     --button-padding: var(--spacing-md) var(--spacing-lg);
     --button-padding-compact: var(--spacing-sm) var(--spacing-md);
@@ -647,14 +647,24 @@ blockquote.verse cite {
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+}
+
+.site-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, var(--color-background), transparent);
+    transform: translateY(100%);
+    pointer-events: none;
 }
 
 .header-container {
     max-width: 52rem;
     margin: 0 auto;
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg) 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
