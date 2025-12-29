@@ -103,7 +103,7 @@
         --color-background-alt: #0f1318;
         --color-border: #1a1f28;
         --color-border-light: #151922;
-        --color-input-border: #555555;
+        --color-input-border: #444444;
         --color-link: #7B82F0;
         --color-link-hover: #A5AAFA;
         --color-accent: #a0a0a0;
@@ -119,7 +119,7 @@
     --color-background-alt: #0f1318;
     --color-border: #1a1f28;
     --color-border-light: #151922;
-    --color-input-border: #555555;
+    --color-input-border: #444444;
     --color-link: #7B82F0;
     --color-link-hover: #A5AAFA;
     --color-accent: #a0a0a0;
@@ -161,7 +161,7 @@
 [data-theme="dark"] .copy-link-button,
 [data-theme="dark"] .case-study-button {
     background-color: transparent;
-    border-color: #707070;
+    border-color: #555555;
 }
 
 /* ===== SMOOTH TRANSITIONS =====
@@ -1615,7 +1615,7 @@ button, .button, input[type="submit"], input[type="button"],
     min-height: 48px;
     max-height: 48px;
     background-color: transparent;
-    border: 1px solid #a0a5aa;
+    border: 1px solid #c5c5c5;
     border-radius: 100px;
     color: var(--color-text);
     text-decoration: none;
@@ -1635,6 +1635,22 @@ input[type="submit"], input[type="button"] {
     padding-top: 0;
     padding-bottom: 0;
     box-sizing: border-box;
+}
+
+/* Primary Button - high contrast */
+.btn-primary,
+input[type="submit"] {
+    background-color: var(--color-text) !important;
+    border-color: var(--color-text) !important;
+    color: var(--color-background) !important;
+}
+
+.btn-primary:hover,
+input[type="submit"]:hover {
+    background-color: var(--color-text-muted) !important;
+    border-color: var(--color-text-muted) !important;
+    color: var(--color-background) !important;
+    transform: translateY(-1px);
 }
 
 /* Pill/Badge style for category buttons */
@@ -2897,7 +2913,11 @@ details:last-of-type {
     display: block;
     width: 1px;
     height: 1rem;
-    background-color: var(--color-border-light);
+    background-color: var(--color-border);
+}
+
+[data-theme="dark"] .nav-menu .nav-divider::before {
+    background-color: #444444;
 }
 
 /* ===== THEME TOGGLE BUTTON =====
@@ -2934,8 +2954,9 @@ details:last-of-type {
     display: none;
 }
 
-/* Hide prefix on desktop */
-.toggle-prefix {
+/* Hide prefix and chevron on desktop */
+.toggle-prefix,
+.toggle-chevron {
     display: none;
 }
 
@@ -2964,10 +2985,18 @@ details:last-of-type {
         display: none !important;
     }
 
-    /* Show "Appearance:" prefix on mobile */
+    /* Show "Appearance" prefix and chevron on mobile */
     .toggle-prefix {
         display: inline;
         margin-right: var(--spacing-xs);
+    }
+
+    .toggle-chevron {
+        display: inline;
+        vertical-align: middle;
+        margin-left: 2px;
+        margin-right: var(--spacing-xs);
+        opacity: 0.6;
     }
 
     /* Make toggle button behave like nav links on mobile */
