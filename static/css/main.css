@@ -1805,13 +1805,8 @@ form input[type="submit"] {
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-md);
     background-color: var(--color-background);
-    border: 1px solid var(--color-border-light);
+    border: none;
     border-radius: var(--radius-small);
-    transition: border-color var(--transition-fast);
-}
-
-.microblog_post:hover {
-    border-color: var(--color-border);
 }
 
 .microblog_post:last-child {
