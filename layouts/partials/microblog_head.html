@@ -26,7 +26,25 @@
   <link rel="me" href="https://instagram.com/{{ . }}">
 {{ end }}
 
-<link rel="shortcut icon" href="https://micro.blog/{{ .Site.Author.username }}/favicon.png" type="image/x-icon">
+{{/* Extract profile image from /intro page for favicon */}}
+{{ $faviconUrl := "" }}
+{{ $intro := .Site.GetPage "/intro" }}
+{{ with $intro }}
+  {{ $matches := findRE `\!\[.*?\]\((.*?)\)` .RawContent 1 }}
+  {{ with $matches }}
+    {{ $match := index . 0 }}
+    {{ $urlMatches := findRE `\((.*?)\)` $match 1 }}
+    {{ with $urlMatches }}
+      {{ $faviconUrl = strings.TrimPrefix "(" (strings.TrimSuffix ")" (index . 0)) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if eq $faviconUrl "" }}
+  {{ $faviconUrl = printf "https://micro.blog/%s/favicon.png" .Site.Author.username }}
+{{ end }}
+<link rel="shortcut icon" href="{{ $faviconUrl }}" type="image/png">
+<link rel="icon" href="{{ $faviconUrl }}" type="image/png">
+<link rel="apple-touch-icon" href="{{ $faviconUrl }}">
 <link rel="EditURI" type="application/rsd+xml" href="{{ "rsd.xml" | absURL }}">
 <link rel="authorization_endpoint" href="https://micro.blog/indieauth/auth">
 <link rel="token_endpoint" href="https://micro.blog/indieauth/token">
