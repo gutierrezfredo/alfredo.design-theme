@@ -10,13 +10,7 @@
                 {{ else }}
                 <h1 class="site-title">
                     <a href="/" class="u-url" rel="home">
-                        {{ if not .Site.Params.hide_profile_photo }}
-                            {{ if .Site.Params.custom_avatar }}
-                            <img src="{{ .Site.Params.custom_avatar }}" alt="{{ .Site.Title }} logo" class="title-avatar u-photo" width="32" height="32">
-                            {{ else if .Site.Author.avatar }}
-                            <img src="{{ .Site.Author.avatar }}" alt="{{ .Site.Title }} logo" class="title-avatar u-photo" width="32" height="32">
-                            {{ end }}
-                        {{ end }}
+                        <img src="/images/logo.svg" alt="{{ .Site.Title }} logo" class="title-avatar u-photo" width="36" height="36">
                         <span class="p-name">{{ .Site.Title }}</span>
                     </a>
                 </h1>
@@ -52,7 +46,7 @@
                     <ul class="nav-menu">
                         {{ range .Site.Menus.main }}
                         <li class="nav-item" role="none">
-                            <a href="{{ .URL }}" class="nav-link {{ .Name }}{{ if or (eq $.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $.RelPermalink .URL)) (and (eq (lower .Name) "projects") (eq $.RelPermalink "/")) }} active{{ end }}" role="menuitem">
+                            <a href="{{ .URL }}" class="nav-link {{ .Name }}{{ if or (eq $.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $.RelPermalink .URL)) (and (eq (lower .Name) "work") (eq $.RelPermalink "/")) }} active{{ end }}" role="menuitem">
                                 {{ if eq (lower .Name) "search" }}
                                 <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
                                 <span class="icon-label">Search</span>

@@ -28,7 +28,7 @@
     --color-background-alt: #f8f9fa;
     --color-border: #e0e5ea;
     --color-border-light: #ebeef2;
-    --color-input-border: #b0b5ba;
+    --color-input-border: #c0c5ca;
     --color-link: #3C44D2;
     --color-link-hover: #2A30A0;
     --color-accent: #666666;
@@ -103,7 +103,7 @@
         --color-background-alt: #0f1318;
         --color-border: #1a1f28;
         --color-border-light: #151922;
-        --color-input-border: #454a55;
+        --color-input-border: #555555;
         --color-link: #7B82F0;
         --color-link-hover: #A5AAFA;
         --color-accent: #a0a0a0;
@@ -119,7 +119,7 @@
     --color-background-alt: #0f1318;
     --color-border: #1a1f28;
     --color-border-light: #151922;
-    --color-input-border: #454a55;
+    --color-input-border: #555555;
     --color-link: #7B82F0;
     --color-link-hover: #A5AAFA;
     --color-accent: #a0a0a0;
@@ -147,6 +147,22 @@
 [data-theme="dark"] pre { background-color: #2d2d2d; border-color: var(--color-border); color: #e5e5e5; }
 [data-theme="dark"] highlight, [data-theme="dark"] mark { background-color: #4a4a00; color: #ffffff; }
 [data-theme="dark"] .archive_years select { color: #000; }
+[data-theme="dark"] .title-avatar { filter: invert(1); }
+[data-theme="dark"] .btn,
+[data-theme="dark"] button,
+[data-theme="dark"] .button,
+[data-theme="dark"] input[type="submit"],
+[data-theme="dark"] input[type="button"],
+[data-theme="dark"] .post-actions a,
+[data-theme="dark"] .post-actions button,
+[data-theme="dark"] .prev-page,
+[data-theme="dark"] .next-page,
+[data-theme="dark"] .share-link-button,
+[data-theme="dark"] .copy-link-button,
+[data-theme="dark"] .case-study-button {
+    background-color: transparent;
+    border-color: #707070;
+}
 
 /* ===== SMOOTH TRANSITIONS =====
  * Makes dark/light mode switching smooth and pleasant.
@@ -690,11 +706,11 @@ blockquote.verse cite {
 }
 
 .title-avatar {
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 50%;
+    width: 36px;
+    height: 36px;
     margin: 0;
     flex-shrink: 0;
+    border: none !important;
 }
 
 .site-title a {
@@ -707,7 +723,7 @@ blockquote.verse cite {
 }
 
 .site-title a:hover {
-    color: var(--color-link);
+    color: inherit;
 }
 
 /* Back button for post pages */
@@ -1141,11 +1157,19 @@ blockquote.verse cite {
 
 
     /* Hide mobile-only elements */
-    .menu-backdrop,
-    .nav-menu.scrollable {
+    .menu-backdrop {
         display: none;
     }
-    
+
+    .nav-menu.scrollable {
+        display: flex;
+    }
+
+    /* Hide Subscribe link on desktop (mobile-only) */
+    .nav-item:has(.nav-link.Subscribe) {
+        display: none;
+    }
+
     .nav-menu.scrollable::after {
         content: '';
         position: sticky;
@@ -1421,25 +1445,17 @@ blockquote.verse cite {
 .post-subscribe form {
     display: flex;
     gap: var(--spacing-sm);
-    justify-content: center;
-    flex-wrap: wrap;
+    width: 100%;
     align-items: center;
 }
 
 .post-subscribe input[type="text"],
 .post-subscribe input[type="email"] {
     flex: 1;
-    max-width: 280px;
+    min-width: 0;
     height: 48px;
     min-height: 48px;
     max-height: 48px;
-}
-
-@media (min-width: 768px) {
-    .post-subscribe input[type="text"],
-    .post-subscribe input[type="email"] {
-        max-width: 360px;
-    }
 }
 
 .post-subscribe input[type="submit"],
@@ -1589,19 +1605,18 @@ hr {
 .btn,
 button, .button, input[type="submit"], input[type="button"],
 .post-actions a, .post-actions button,
-.archive-categories .category-button,
 .prev-page, .next-page,
-.post-categories .category-button,
-.share-link-button, .copy-link-button {
+.share-link-button, .copy-link-button,
+.case-study-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     height: 48px;
     min-height: 48px;
     max-height: 48px;
-    background-color: var(--color-background-alt);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-small);
+    background-color: transparent;
+    border: 1px solid #a0a5aa;
+    border-radius: 100px;
     color: var(--color-text);
     text-decoration: none;
     font-weight: 600;
@@ -1622,36 +1637,43 @@ input[type="submit"], input[type="button"] {
     box-sizing: border-box;
 }
 
-/* Full contrast submit buttons */
-input[type="submit"] {
-    background-color: var(--color-text);
-    border-color: var(--color-text);
-    color: var(--color-background);
-}
-
-input[type="submit"]:hover {
-    background-color: var(--color-text-light);
-    border-color: var(--color-text-light);
-    color: var(--color-background);
-}
-
-/* Compact button variant */
-.post-categories .category-button {
-    padding: var(--button-padding-compact);
+/* Pill/Badge style for category buttons */
+.category-button {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background-color: var(--color-background-alt);
+    border-radius: 100px;
+    color: var(--color-text-muted);
     font-size: var(--font-size-xs);
-    height: 48px;
-    min-height: 48px;
-    max-height: 48px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+    line-height: 1.4;
+}
+
+.category-button:hover {
+    color: var(--color-text);
+    background-color: var(--color-border);
+}
+
+[data-theme="dark"] .category-button {
+    background-color: #222222;
+    color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .category-button:hover {
+    background-color: #333333;
+    color: var(--color-text);
 }
 
 /* Consolidated button hover states */
 .btn:hover,
 button:hover, .button:hover, input[type="submit"]:hover, input[type="button"]:hover,
 .post-actions a:hover, .post-actions button:hover,
-.archive-categories .category-button:hover,
 .prev-page:hover, .next-page:hover,
-.post-categories .category-button:hover,
 .share-link-button:hover, .copy-link-button:hover,
+.case-study-button:hover,
 .microblog_reply_button input[type="submit"]:hover:not(:disabled) {
     background-color: var(--color-background);
     border-color: var(--color-accent);
@@ -1663,10 +1685,9 @@ button:hover, .button:hover, input[type="submit"]:hover, input[type="button"]:ho
 .btn:focus,
 button:focus, .button:focus, input[type="submit"]:focus, input[type="button"]:focus,
 .post-actions a:focus, .post-actions button:focus,
-.archive-categories .category-button:focus,
 .prev-page:focus, .next-page:focus,
-.post-categories .category-button:focus,
-.share-link-button:focus, .copy-link-button:focus {
+.share-link-button:focus, .copy-link-button:focus,
+.case-study-button:focus {
     outline: 2px solid var(--color-text);
     outline-offset: 2px;
 }
@@ -1681,8 +1702,8 @@ input[type="url"], input[type="password"], select {
     min-height: 48px;
     max-height: 48px;
     background-color: var(--color-background);
-    border: 2px solid var(--color-input-border);
-    border-radius: var(--radius-small);
+    border: 1px solid var(--color-input-border);
+    border-radius: 100px;
     color: var(--color-text);
     font-family: inherit;
     font-size: 1em;
@@ -1697,7 +1718,7 @@ textarea {
     padding: var(--spacing-sm) var(--spacing-md);
     min-height: 48px;
     background-color: var(--color-background);
-    border: 2px solid var(--color-input-border);
+    border: 1px solid var(--color-input-border);
     border-radius: var(--radius-small);
     color: var(--color-text);
     font-family: inherit;
@@ -1846,7 +1867,7 @@ form input[type="submit"] {
 .microblog_reply_textarea textarea {
     width: 100%;
     padding: var(--spacing-sm);
-    border: 2px solid var(--color-input-border);
+    border: 1px solid var(--color-input-border);
     border-radius: var(--radius-small);
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
@@ -1859,23 +1880,13 @@ form input[type="submit"] {
 }
 
 .microblog_reply_button input[type="submit"] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     padding: var(--spacing-md) var(--spacing-lg);
     min-height: 44px;
-    background-color: var(--color-text);
-    border: 1px solid var(--color-text);
-    border-radius: var(--radius-small);
-    color: var(--color-background);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-fast);
+    border-radius: 100px;
 }
 
 .microblog_reply_button input[type="submit"]:hover:not(:disabled) {
-    background-color: var(--color-text-light);
-    border-color: var(--color-text-light);
+    background-color: transparent;
 }
 
 .microblog_reply_button input[type="submit"]:disabled {
@@ -1905,27 +1916,8 @@ form input[type="submit"] {
 }
 
 .post-categories .category-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-sm) var(--spacing-md);
-    min-height: 36px;
-    background-color: var(--color-background-alt);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-small);
-    color: var(--color-text-muted);
-    text-decoration: none;
-    font-size: var(--font-size-xs);
-    font-weight: 600;
     text-transform: capitalize;
-    transition: all var(--transition-fast);
     white-space: nowrap;
-}
-
-.post-categories .category-button:hover {
-    color: var(--color-text);
-    border-color: var(--color-accent);
-    background-color: var(--color-background);
 }
 
 .post-categories .category-button:focus {
@@ -2527,27 +2519,11 @@ details:last-of-type {
 }
 
 /* Read More Button */
+/* Case study button specific overrides */
 .case-study-button {
-    display: inline-flex;
-    align-items: center;
     gap: var(--spacing-xs);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    background-color: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-medium);
-    font-size: var(--font-size-small);
-    font-weight: 500;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: all var(--transition-base);
     margin-top: var(--spacing-md);
     width: fit-content;
-}
-
-.case-study-button:hover {
-    background-color: var(--color-text);
-    color: var(--color-background);
-    border-color: var(--color-text);
 }
 
 .button-arrow {
@@ -2921,8 +2897,7 @@ details:last-of-type {
     display: block;
     width: 1px;
     height: 1rem;
-    background-color: var(--color-text-muted);
-    opacity: 0.5;
+    background-color: var(--color-border-light);
 }
 
 /* ===== THEME TOGGLE BUTTON =====
@@ -2964,10 +2939,18 @@ details:last-of-type {
     display: none;
 }
 
-/* Hide divider on mobile */
+/* Horizontal divider on mobile */
 @media (max-width: 768px) {
     .nav-menu .nav-divider {
-        display: none;
+        display: block;
+        width: 100%;
+        padding: var(--spacing-sm) 0;
+        margin: 0;
+    }
+
+    .nav-menu .nav-divider::before {
+        width: 100%;
+        height: 1px;
     }
 
     .icon-label {
