@@ -11,9 +11,9 @@
     overlay.className = 'lightbox-overlay';
     overlay.innerHTML = `
         <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
-        <button class="lightbox-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-prev" aria-label="Previous image"><i class="ph ph-caret-left"></i></button>
         <img class="lightbox-image" src="" alt="">
-        <button class="lightbox-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+        <button class="lightbox-next" aria-label="Next image"><i class="ph ph-caret-right"></i></button>
         <div class="lightbox-counter"></div>
     `;
     document.body.appendChild(overlay);

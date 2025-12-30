@@ -32,8 +32,8 @@
         <meta name="twitter:image" content="{{ .Site.Params.custom_avatar }}">
         <meta property="og:image" content="{{ .Site.Params.custom_avatar }}">
       {{ else }}
-        <meta name="twitter:image" content="{{ .Site.Author.avatar }}">
-        <meta property="og:image" content="{{ .Site.Author.avatar }}">
+        <meta name="twitter:image" content="{{ .Site.Params.author.avatar }}">
+        <meta property="og:image" content="{{ .Site.Params.author.avatar }}">
       {{ end }}
     {{ else }}
       <meta name="twitter:description" content="{{ .Summary | truncate 60 }}">
@@ -86,13 +86,10 @@
     
     {{ partial "microblog_head.html" . }}
     
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    {{ if templates.Exists "partials/microhook-unfontawesome.html" }}
-    {{ partial "microhook-unfontawesome.html" . }}
-    {{ else }}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-    {{ end }}
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="/css/phosphor-regular-style.css">
+    <link rel="stylesheet" href="/css/phosphor-bold-style.css">
+    <link rel="stylesheet" href="/css/phosphor-fill-style.css">
     
     {{ if .Site.Params.custom_head_html }}
     {{ .Site.Params.custom_head_html | safeHTML }}

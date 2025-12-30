@@ -9,8 +9,8 @@
             <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
                 {{ .Date | time.Format ":date_long" }}
             </time>
-            {{ if .Site.Author.name }}
-            <span class="p-author" style="display: none;">{{ .Site.Author.name }}</span>
+            {{ if .Site.Params.author.name }}
+            <span class="p-author" style="display: none;">{{ .Site.Params.author.name }}</span>
             {{ end }}
         </div>
     </header>
@@ -79,13 +79,13 @@
                 <a href="https://shareopenly.org/share/?url={{ .Permalink }}&text={{ $shareText }}" 
                    class="share-link-button" target="_blank" rel="noopener noreferrer" 
                    title="{{ T "Share" }}">
-                    <i class="fas fa-share-nodes" aria-hidden="true"></i>
+                    <i class="ph ph-share-network" aria-hidden="true"></i>
                     {{ T "Share" }}
                 </a>
             {{ end }}
             {{ if not .Site.Params.hide_copy_links }}
                 <button class="copy-link-button" data-url="{{ .Permalink }}" data-copied-text="{{ T "LinkCopied" }}" title="{{ T "CopyLink" }}">
-                    <i class="fas fa-copy" aria-hidden="true"></i>
+                    <i class="ph ph-copy" aria-hidden="true"></i>
                     {{ T "CopyLink" }}
                 </button>
             {{ end }}

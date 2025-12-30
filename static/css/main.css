@@ -1289,7 +1289,7 @@ blockquote.verse cite {
     text-decoration: none;
     border-radius: var(--radius-small);
     transition: all 0.2s ease;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 }
 
 .social-link:hover,
@@ -1568,9 +1568,9 @@ blockquote.verse cite {
 
 .footer-social svg,
 .footer-social i {
-    width: 28px;
-    height: 28px;
-    font-size: 28px;
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1580,9 +1580,9 @@ blockquote.verse cite {
 @media (max-width: 768px) {
     .footer-social svg,
     .footer-social i {
-        width: 24px;
-        height: 24px;
-        font-size: 24px;
+        width: 28px;
+        height: 28px;
+        font-size: 28px;
     }
 }
 
